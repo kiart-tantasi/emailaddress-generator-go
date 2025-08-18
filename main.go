@@ -40,7 +40,7 @@ func main() {
 	if len(os.Args) > 3 && os.Args[3] != "" {
 		outputFilename = os.Args[3]
 	} else {
-		outputFilename = fmt.Sprintf("contacts%d.csv", count)
+		outputFilename = fmt.Sprintf("output%d.csv", count)
 	}
 	// ========================== ARGUMENTS ==========================
 
@@ -78,5 +78,5 @@ func main() {
 		return
 	}
 
-	fmt.Println("Done! Wrote", count, "lines to", outputFilename)
+	fmt.Println("Done! Wrote", count, "email addresses to", outputFilename)
 }
