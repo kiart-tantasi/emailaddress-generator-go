@@ -7,7 +7,7 @@ import (
 	"strconv"
 )
 
-const USAGE_MESSAGE = "Usage: go run main.go <count, required> <domain, optional> <output-filename, optional>"
+const USAGE_MESSAGE = "Usage: go run main.go <count, required> <domain, optional> <output-filename, optional> <offset, optional>"
 
 func main() {
 	// ========================== ARGUMENTS ==========================
@@ -42,6 +42,15 @@ func main() {
 	} else {
 		outputFilename = fmt.Sprintf("output%d.csv", count)
 	}
+	// 4th argument: offset
+	offset := 1
+	if len(os.Args) > 4 && os.Args[4] != "" {
+		offset, err = strconv.Atoi(os.Args[4])
+		if err != nil {
+			fmt.Printf("Error with invalid offset: %s\n", err)
+			os.Exit(1)
+		}
+	}
 	// ========================== ARGUMENTS ==========================
 
 	// Create output file
@@ -63,7 +72,7 @@ func main() {
 	}
 
 	// Use buffered writer for performance
-	for i := 1; i <= count; i++ {
+	for i := offset; i <= count; i++ {
 		_, err := writer.WriteString(fmt.Sprintf("user%d@%s\n", i, domain))
 		if err != nil {
 			fmt.Println("Error writing to file:", err)
