@@ -7,7 +7,7 @@ import (
 	"strconv"
 )
 
-const USAGE_MESSAGE = "Usage: go run main.go <count, required> <domain, optional> <output-filename, optional> <offset, optional>"
+const USAGE_MESSAGE = "Usage: go run main.go <count, required> <domain, optional> <output-filename, optional> <offset, optional> <prefix, optional>"
 
 func main() {
 	// ========================== ARGUMENTS ==========================
@@ -51,6 +51,11 @@ func main() {
 			os.Exit(1)
 		}
 	}
+	// 5th argument: prefix
+	prefix := ""
+	if len(os.Args) > 5 && os.Args[5] != "" {
+		prefix = os.Args[5]
+	}
 	// ========================== ARGUMENTS ==========================
 
 	// Create output file
@@ -73,7 +78,7 @@ func main() {
 
 	// Use buffered writer for performance
 	for i := offset; i <= count; i++ {
-		_, err := writer.WriteString(fmt.Sprintf("user%d@%s\n", i, domain))
+		_, err := writer.WriteString(fmt.Sprintf("%suser%d@%s\n", prefix, i, domain))
 		if err != nil {
 			fmt.Println("Error writing to file:", err)
 			return
