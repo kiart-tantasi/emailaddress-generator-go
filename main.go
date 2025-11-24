@@ -56,7 +56,7 @@ func main() {
 	if len(os.Args) > 5 && os.Args[5] != "" {
 		prefix = os.Args[5]
 	}
-	// ========================== ARGUMENTS ==========================
+	// ========================== END OF ARGUMENTS ==========================
 
 	// Create output file
 	file, err := os.Create(outputFilename)
