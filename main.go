@@ -92,5 +92,5 @@ func main() {
 		return
 	}
 
-	fmt.Println("Done! Wrote", count, "email addresses to", outputFilename)
+	fmt.Println("Done! Wrote", (count - offset + 1), "email addresses to", outputFilename)
 }
